@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+    <title>Dropfolio</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/dropfolio.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    
+        
+</head>
+<body>
+
+<div class="container">
+
+		<div class="story-menu">
+			<a href="index.html"><img src="back.png"></a>
+		</div>
+		
+      <div class="story-title">
+        <h1>New Zealand</h1>
+        <p>May 2013 - South Island</p>
+      </div>
+      
+      <div class="row">
+      	<div class="col-md-12 story-img-list">
+      		<div id="map-canvas"></div>
+      		<script>
+      		var geocoder;
+      		var map;
+      		var address = 'Queenstown, NZ';
+      		function initialize() {
+      		
+      			geocoder = new google.maps.Geocoder();
+      			var latlng = new google.maps.LatLng(-34.397, 150.644);
+      			
+      		  var mapOptions = {
+      		    zoom: 6,
+      		    center: latlng,
+      		    disableDefaultUI: true,
+      		    mapTypeId: google.maps.MapTypeId.TERRAIN
+      		  };
+      		  map = new google.maps.Map(document.getElementById('map-canvas'),
+      		      mapOptions);
+      		      
+      		  if (geocoder) {
+      		        geocoder.geocode( { 'address': address}, function(results, status) {
+      		          if (status == google.maps.GeocoderStatus.OK) {
+      		            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+      		            map.setCenter(results[0].geometry.location);
+      		  
+      		              var infowindow = new google.maps.InfoWindow(
+      		                  { content: '<b>'+address+'</b>',
+      		                    size: new google.maps.Size(150,50)
+      		                  });
+      		      
+      		              var marker = new google.maps.Marker({
+      		                  position: results[0].geometry.location,
+      		                  map: map, 
+      		                  title:address
+      		              }); 
+      		              google.maps.event.addListener(marker, 'click', function() {
+      		                  infowindow.open(map,marker);
+      		              });
+      		  
+      		            } else {
+      		              alert("No results found");
+      		            }
+      		          } else {
+      		            alert("Geocode was not successful for the following reason: " + status);
+      		          }
+      		        });
+      		  }
+      		  
+      		}
+      		
+      		google.maps.event.addDomListener(window, 'load', initialize);
+      		</script>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/1.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/2.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/3.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="blank.jpg"></a>
+      		<div class="story-list-text"><p class="list-text-strong">Mt Cook</p><p>Fly over the Mt Cook, and great views of the glacier. We were lucky to have such a nice weather.</p>
+      		<p>Skate ipsum dolor sit amet, berm Jai Alai Banks switch tuna-flip Japan air hip. Heel flip half-flip masonite chicken wing grind Venice. Rob Dyrdek ledge blunt bigspin frontside method air. Birdie tail Daewon Song body varial air manual. </p>
+      		
+      		<p>Japan air melancholy griptape Saran Wrap downhill 270 Fiesta Mall. Mike Vallely disaster skate or die blunt 720 wall ride half-flip. 180 fast plant durometer Kris Markovich ollie hole baseplate kickflip. Fakie out half-flip regular footed hand rail boneless Johnny Rad gnarly. </p></div>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/4.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/5.jpg"></a>
+      	</div>
+      	</div>
+      	<div class="story-title">
+      	  <p>June 2013 - Road to Queenstown</p>
+      	</div>
+      	<div class="row">
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="blank_alt.jpg"></a>
+      		<div class="story-list-text"><p class="list-text-strong">Queenstown</p><p>Fly over the Mt Cook, and great views of the glacier. We were lucky to have such a nice weather.</p>
+      		<p>Skate ipsum dolor sit amet, berm Jai Alai Banks switch tuna-flip Japan air hip. Heel flip half-flip masonite chicken wing grind Venice. Rob Dyrdek ledge blunt bigspin frontside method air. Birdie tail Daewon Song body varial air manual. Half-flip 720 Tracker launch ramp aerial. Kingpin bone air ho-ho berm hard flip. Gnarly nose quarter pipe street nose blunt. Durometer camel back bruised heel pop shove-it airwalk. Birdie powerslide shinner Skull and Sword regular footed ollie. </p>
+      		
+			</div>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/6.jpg"></a>
+      	</div>
+      	<div class="col-md-12 story-img-list full-size">
+      		<a href=""><img src="../1_NewZealand/7.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/8.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/9.jpg"></a>
+      	</div>
+      	<div class="col-md-12 story-img-list full-width">
+      		<a href=""><img class="img-centered" src="../1_NewZealand/10.jpg"></a>
+      	</div>
+      	</div>
+      	<div class="story-title">
+      	  <p>June 2013 - Beautiful Catlins</p>
+      	</div>
+      	<div class="row">
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/11.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/12.jpg"></a>
+      	</div>
+      	<div class="col-md-6 story-img-list">
+      		<a href=""><img src="../1_NewZealand/13.jpg"></a>
+      	</div>
+      </div>
+
+    </div>
+<!--    $(window).load(function(){
+        initialize()
+    });-->
+  </body>
+</html>

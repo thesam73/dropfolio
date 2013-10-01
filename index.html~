@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+    <title>Dropfolio</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/dropfolio.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+      <div class="main-title">
+        <h1>Dropfolio</h1>
+        <p>Welcome to your dropfolio - Choose your story.</p>
+      </div>
+      
+      <div class="row">
+      	<div class="col-md-6 story-img-list main-story-img-list">
+      		<a href="NewZealand.html"><img src="../1_NewZealand/main.jpg"><div class="story-img-list-text">New Zealand</div></a>
+      	</div>
+      	<div class="col-md-6 story-img-list main-story-img-list">
+      		<a href="../2_Paris/main.jpg"><img src="../2_Paris/main.jpg"><div class="story-img-list-text">Paris</div></a>
+      	</div>
+      	<div class="col-md-6 story-img-list main-story-img-list">
+      		<a href="NZ2013/nz2013.php"><img src="../3_USA/1.jpg"><div class="story-img-list-text">USA</div></a>
+      	</div>
+      </div>
+
+    </div>
+</body>
+</html>

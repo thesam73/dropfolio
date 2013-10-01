@@ -1,0 +1,163 @@
+@font-face
+{
+	font-family: Amatic; 
+	src: url('../fonts/AmaticSC-Regular.ttf');
+}
+@font-face {
+    font-family: Amatic;
+    src: url("../font/Amatic-Blod.otf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face
+{
+	font-family: Verano; 
+	src: url('../fonts/Verano.otf');
+}
+
+@font-face {
+    font-family: "SourceSansPro";
+    src: url("../font/SourceSansPro-Black.otf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SourceSansPro";
+    src: url("../font/SourceSansPro-Regular.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SourceSansPro";
+    src: url("../font/SourceSansPro-Light.otf");
+    font-weight: lighter;
+    font-style: normal;
+}
+
+body {
+	background-color: #dedede;
+}
+
+.main-title {
+	text-align: center;
+	font-family: Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.main-title h1 {
+	font: bold 100px Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.main-title p {
+	text-transform: capitalize;
+	font-size: 50px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+.story-menu {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+.story-menu img{
+	max-height:100px;
+}
+.story-title {
+	font-family: Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.story-title h1 {
+	text-align: center;
+	font: bold 100px Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.story-title p {
+	text-transform: capitalize;
+	font-size: 50px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+.story-img-list a {
+	max-height: 500px;
+	width: 100%;
+	overflow: hidden;
+	float: left;
+	display: block;
+}
+
+#map-canvas {
+	min-height: 500px;
+	width: 100%;
+	height: 100%;
+}
+.main-story-img-list a {
+	height:275px;
+	margin-bottom: 20px;
+}
+.story-img-list img {
+  	width: 100%;
+  	position:relative;
+  	vertical-align: middle;
+  	top: -25%;
+}
+
+.story-list-text {
+	padding: 50px;
+	position: absolute;
+}
+
+.story-list-text p{
+	font: 200 20px SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+p.list-text-strong {
+	font-weight: bold;
+	font-size: 40px;
+	font-family: Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.full-width a {
+	max-height: 700px;
+}
+
+.full-size a {
+	max-height: 100%
+}
+
+.img-centered {
+	position: absolute;
+	overflow: hidden;
+	margin-top: -10%;
+}
+
+.story-img-list {
+	padding: 0;
+}
+
+.main-story-img-list img{
+	-webkit-filter: grayscale(50%) sepia(25%) blur(2px);
+	-webkit-transition : -webkit-filter 500ms linear;
+/*	-webkit-filter: ;
+	-webkit-filter: ;*/
+}
+
+.main-story-img-list img:hover{
+/*	-webkit-filter: grayscale(10%);*/
+}
+
+.story-img-list-text {
+	font-family: Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    left: 0;
+    position:absolute;
+    text-align:center;
+    top: 29%;
+    width: 64%;
+    margin-left: 18%;
+	text-transform: uppercase;
+	font-size: 5em;
+	color: #eeeeee;
+	border: 3px solid #eeeeee;
+}
