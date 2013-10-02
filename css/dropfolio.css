@@ -41,6 +41,13 @@ body {
 	background-color: #dedede;
 }
 
+.bg-story:nth-child(even) {
+	background-color: #ebebeb;
+}
+.bg-story:nth-child(odd) {
+	background-color: #dedede;
+}
+
 .main-title {
 	text-align: center;
 	font-family: Amatic, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -104,14 +111,25 @@ body {
 }
 
 .story-list-text {
-	padding: 50px;
-	position: absolute;
-}
+	max-height: 500px;
+	width: 100%;
+	overflow: hidden;
+	float: left;
+	display: block;
+	}
+
+
+
 
 .story-list-text p{
 	font: 200 20px SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+@media screen and (max-width: 1200px){/* for screens smaller then 850px, set the font size smaller */
+   .story-list-text p{
+   	font: 100 16px SourceSansPro, "Helvetica Neue", Helvetica, Arial, sans-serif;
+   }
+}
 
 p.list-text-strong {
 	font-weight: bold;
@@ -161,3 +179,4 @@ p.list-text-strong {
 	color: #eeeeee;
 	border: 3px solid #eeeeee;
 }
+

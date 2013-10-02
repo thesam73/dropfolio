@@ -76,20 +76,22 @@ function displayStory($imgTree, $Imagedirectory) {
   $imgArray = $imgTree[$Imagedirectory];
   $imgArray = changeOrderFullSize($imgArray);
   foreach ($imgArray as $key => $file) {
-    $type = getFileType($file);
-    $size = getFileSize($file);
     if (is_array($file)) {
       $subfolder = removedirPrefix(removedirMainfolder($key));
-      echo '</div><div class="row">';
+      echo '</div></div></div><div class="bg-story"><div class="container"><div class="row">';
       echo '<div class="story-title"><p>'.$subfolder.'</p></div>';
       foreach ($file as $subkey => $subfile) {
-        $subtype = getFileType($subfile);
-        $subsize = getFileSize($subfile);
-        createFileHTML($subfile, $subtype, $subsize);
-        //createWeb($subfile, $Imagedirectory);
+      	if (is_file($subfile)) {
+        	$subtype = getFileType($subfile);
+        	$subsize = getFileSize($subfile);
+        	createFileHTML($subfile, $subtype, $subsize);
+        	//createWeb($subfile, $Imagedirectory);
+        	}
       }
     }
-    else {
+    elseif (is_file($file)) {
+    	$type = getFileType($file);
+    	$size = getFileSize($file);
       createFileHTML($file, $type, $size);
       //createWeb($img, $Imagedirectory);
     }
@@ -100,41 +102,46 @@ function changeOrderFullSize($imgArray) {
   //re order the tree for better full image display
   $nbFullWidth = 0;
   foreach ($imgArray as $key => $file) {
-    $size = getFileSize($file);
-    if ($size !== 'normal' && $key+$nbFullWidth & 1 && !is_array($file)) {
-      $item = $imgArray[ $key ];
-      $imgArray[ $key ] = $imgArray[ $key + 1 ];
-      $imgArray[ $key + 1 ] = $item;
-      $nbFullWidth = $nbFullWidth + 1;
-    }
     if (is_array($file)) {
       $file = changeOrderFullSize($file);
       $imgArray[ $key ] = $file;
+    }
+    elseif (is_file($file)) {
+        $size = getFileSize($file);
+        if ($size !== 'normal' && $key+$nbFullWidth & 1 && !is_array($file)) {
+          $item = $imgArray[ $key ];
+          $imgArray[ $key ] = $imgArray[ $key + 1 ];
+          $imgArray[ $key + 1 ] = $item;
+          $nbFullWidth = $nbFullWidth + 1;
+          }
     }
   }
   return $imgArray;
 }
 
 function getFileType($file) {
-  $type = 'img';
-  if (preg_match("/\.(txt)$/", $file)) {
-    $type = 'txt';
-  }
+	
+	  $type = 'img';
+	  if (is_file($file)) {
+	  if (preg_match("/\.(txt)$/", $file)) {
+	    $type = 'txt';
+	  }
+	  }
   return $type;
 }
 
 function getFileSize($file) {
   $size = 'normal';
-  $pos = strpos($file, 'full');
-  if ($pos !== false) {
-    $size = 'full';
-  }
-  else {
-    $pos = strpos($file, 'big');
-    if ($pos !== false) {
-      $size = 'big';
-    }
-  }
+	  $pos = strpos($file, 'full');
+	  if ($pos !== false) {
+	    $size = 'full';
+	  }
+	  else {
+	    $pos = strpos($file, 'big');
+	    if ($pos !== false) {
+	      $size = 'big';
+	    }
+	  }
   return $size;
 }
 
@@ -142,18 +149,19 @@ function getFileSize($file) {
 function createFileHTML($file, $type, $size) {
   $html = '<div class="story-img-list ';
   if ($size == 'full') {
-    $html .= 'col-md-12 full-size';
+    $html .= 'col-xs-12 col-md-12 full-size';
   }
   elseif ($size == 'big') {
-    $html .= 'col-md-12 full-width';
+    $html .= 'col-xs-12 col-md-12 full-width';
   }
   else {
-    $html .= 'col-md-6';
+    $html .= 'col-xs-12 col-md-6';
   }
   $html .= '">';
   if ($type == 'txt') {
     $f = fopen($file, "r");
-    $html .= '<a href=""><img src="blank_alt.jpg"></a><div class="story-list-text">';
+    //$html .= '<a href=""><img src="blank_alt.jpg"></a><div class="story-list-text">';
+    $html .= '<div class="story-list-text">';
     while(!feof($f)) { 
       $html .= fgets($f);
     }
