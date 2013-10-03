@@ -11,11 +11,23 @@ function displayStoryTitle($directory) {
   echo '<div class="story-title"><h1>' .$Imagedirectorywithoutprefix. '</h1></div>';
 }
 
+function displayEndStory($directory) {
+	$Imagedirectorywithoutsub = removeSubfolder($directory);
+	$Imagedirectorywithoutprefix = removedirPrefix($Imagedirectorywithoutsub);
+	echo '</div></div><div class="container">
+	   		<div class="row">
+	   		<div class="story-title"><h1>' .$Imagedirectorywithoutprefix. '<p><a href="#">Back to top</a></p></h1>
+	   		</div>';
+}
 function scanDirAndPush($dir) {
   $imgArray = array();
   foreach(glob($dir .'/{*.jpg,*.gif,*.jpeg,*.png,*.bmp,*.txt}', GLOB_BRACE) as $file) {
+  //echo $file;
     array_push($imgArray, removedirMainfolder($file));
   }
+  //$imgArray = array_map("basename", $imgArray);
+  natcasesort($imgArray);
+  $imgArray = array_values($imgArray);
   return $imgArray;
 }
 
@@ -39,6 +51,8 @@ function createImgtree($directory) {
     }
   }
   //print_r($imgTree);
+  //sort($imgTree);
+  //print_r($imgTree);
   return $imgTree;
 }
 
@@ -51,10 +65,11 @@ function displayStoryList($imgTree) {
         $Imagedirectorywithoutprefix = removedirPrefix($directory);
         $dirSpace = str_replace(' ', '%20', $directory);
         $imgSpace = str_replace(' ', '%20', $subimg);
-        echo '<div class="col-md-6 story-img-list main-story-img-list">
+        echo '<div class="col-xs-12 col-md-6 story-img-list main-story-img-list">
+        <div class="main-img blur" style="background-image: url(' . $imgSpace . ');">
         <a href=index.php?dir=' .$dirSpace. '><img src='.$imgSpace. '>
          <div class="story-img-list-text">'.$Imagedirectorywithoutprefix.'</div></a>
-       </div>';
+       </div></div>';
        break 2;
      }
    }
@@ -62,10 +77,11 @@ function displayStoryList($imgTree) {
     $Imagedirectorywithoutprefix = removedirPrefix($directory);
     $dirSpace = str_replace(' ', '%20', $directory);
     $imgSpace = str_replace(' ', '%20', $img);
-    echo '<div class="col-md-6 story-img-list main-story-img-list">
+    echo '<div class="col-xs-12 col-md-6 story-img-list main-story-img-list">
+    <div class="main-img blur" style="background-image: url(' . $imgSpace . ');">
     <a href=index.php?dir=' .$dirSpace. '><img src='.$imgSpace. '>
       <div class="story-img-list-text">'.$Imagedirectorywithoutprefix.'</div></a>
-    </div>';
+    </div></div>';
     break;
   }
 }
@@ -74,7 +90,9 @@ function displayStoryList($imgTree) {
 
 function displayStory($imgTree, $Imagedirectory) {
   $imgArray = $imgTree[$Imagedirectory];
+  //print_r($imgArray);
   $imgArray = changeOrderFullSize($imgArray);
+  //print_r($imgArray);
   foreach ($imgArray as $key => $file) {
     if (is_array($file)) {
       $subfolder = removedirPrefix(removedirMainfolder($key));
@@ -99,22 +117,33 @@ function displayStory($imgTree, $Imagedirectory) {
 }
 
 function changeOrderFullSize($imgArray) {
+	$order_changed = false;
   //re order the tree for better full image display
   $nbFullWidth = 0;
-  foreach ($imgArray as $key => $file) {
+   foreach ($imgArray as $key => $file) {
     if (is_array($file)) {
       $file = changeOrderFullSize($file);
       $imgArray[ $key ] = $file;
     }
     elseif (is_file($file)) {
         $size = getFileSize($file);
-        if ($size !== 'normal' && $key+$nbFullWidth & 1 && !is_array($file)) {
+        if ($size !== 'normal' && !is_array($file)) {
+        	$nbFullWidth = $nbFullWidth + 1;
+        }
+        $magicnumber = $key+$nbFullWidth;
+        if ($size !== 'normal' && $magicnumber % 2 == 0 && !is_array($file)) {
           $item = $imgArray[ $key ];
           $imgArray[ $key ] = $imgArray[ $key + 1 ];
           $imgArray[ $key + 1 ] = $item;
-          $nbFullWidth = $nbFullWidth + 1;
+          //$nbFullWidth = $nbFullWidth + 1;
+          $order_changed = true;
+          //print_r($imgArray);
+          //echo '<hr> toto'.$nbFullWidth.$key;
           }
     }
+  }
+  if ($order_changed) {
+  	$imgArray = changeOrderFullSize($imgArray);
   }
   return $imgArray;
 }
@@ -157,23 +186,24 @@ function createFileHTML($file, $type, $size) {
   else {
     $html .= 'col-xs-12 col-md-6';
   }
-  $html .= '">';
+  $html .= '">'."\n".'<div class="main-img"';
   if ($type == 'txt') {
     $f = fopen($file, "r");
     //$html .= '<a href=""><img src="blank_alt.jpg"></a><div class="story-list-text">';
-    $html .= '<div class="story-list-text">';
+    $html .= '><div class="story-list-text">';
     while(!feof($f)) { 
       $html .= fgets($f);
     }
-    $html .= '</div>';
+    $html .= '</div>'."\n";
     fclose($f);
   }
   else {
     $imgSpace = str_replace(' ', '%20', $file);
     $imgTitle = removedirMainfolder(removedirMainfolder($file));
-    $html .= '<a href=' . $imgSpace . ' title=' . $imgTitle . '><img src=' . $imgSpace . '></a>';
+    $html .= ' style="background-image: url(' . $imgSpace . ');">';
+    $html .= '<a href=' . $imgSpace . ' title=' . $imgTitle . '><img src=' . $imgSpace . '></a>'."\n";
   }
-  $html .= '</div>';
+  $html .= '</div>'."\n".'</div>'."\n";
   displayHTML($html);
 }
 
